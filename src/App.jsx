@@ -1,19 +1,9 @@
 import { Canvas, useThree } from '@react-three/fiber';
 import { AxesHelper, Matrix4, Vector3, Euler } from 'three';
 import { useState, useEffect, useRef } from 'react';
+import { OrbitControls } from '@react-three/drei';
 import Controls from './Controls';
 import './App.css';
-
-const DynamicCamera = ({ cameraPosition }) => {
-  const { camera } = useThree();
-
-  useEffect(() => {
-    camera.position.set(...cameraPosition);
-    camera.lookAt(0, 0, 0);
-  }, [cameraPosition]);
-
-  return null;
-};
 
 const Shape = ({ transform, shape }) => {
   const meshRef = useRef();
@@ -73,6 +63,17 @@ const Shape = ({ transform, shape }) => {
   );
 };
 
+const DynamicCamera = ({ cameraPosition }) => {
+  const { camera } = useThree();
+
+  useEffect(() => {
+    camera.position.set(...cameraPosition);
+    camera.lookAt(0, 0, 0);
+  }, [cameraPosition]);
+
+  return null;
+};
+
 const App = () => {
   const [transform, setTransform] = useState({
     position: [0, 0, 0],
@@ -87,32 +88,19 @@ const App = () => {
 
   return (
     <>
-      <div style={{ marginBottom: '10px' }}>
-        <label htmlFor="shape-select">Seleccionar forma: </label>
-        <select
-          id="shape-select"
-          value={shape}
-          onChange={(e) => setShape(e.target.value)}
-        >
-          <option value="cube">Cubo</option>
-          <option value="pyramid">Pirámide</option>
-          <option value="donut">Dona</option>
-          <option value="halfCircle">Medio círculo</option>
-          <option value="cylinder">Cilindro</option>
-          <option value="rhombus">Rombo</option>
-          <option value="hexagon">Hexágono</option>
-        </select>
-      </div>
-      <Controls onTransform={setTransform} />
+      <Controls onTransform={setTransform} shape={shape} setShape={setShape} />
       <Canvas
-        style={{ height: '500px', background: '#f0f0f0' }}
+        style={{ height: '100vh', width: '100vw', background: '#03A' }}
         camera={{ position: [5, 5, 5], fov: 50 }}
       >
+        <OrbitControls enablePan enableZoom enableRotate />
         <DynamicCamera cameraPosition={transform.cameraPosition} />
+
         <ambientLight intensity={transform.brightness} />
         <pointLight position={[10, 10, 10]} />
         <primitive object={new AxesHelper(100)} />
         <Shape transform={transform} shape={shape} />
+        <gridHelper args={[100, 100, 0xff0000, 'teal']} />
       </Canvas>
     </>
   );

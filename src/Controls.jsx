@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const Controls = ({ onTransform }) => {
+const Controls = ({ onTransform, shape, setShape }) => {
   const [position, setPosition] = useState([0, 0, 0]);
   const [rotation, setRotation] = useState([0, 0, 0]);
   const [cameraPosition, setCameraPosition] = useState([5, 5, 5]);
@@ -54,15 +54,28 @@ const Controls = ({ onTransform }) => {
   };
 
   return (
-    <div id="controls" style={{ padding: '10px', border: '1px solid #ccc', marginBottom: '10px', display: 'flex' }}>
-      <div style={{ marginBottom: '10px' }}>
+    <div id="controls" style={{ padding: '10px', marginBottom: '10px', display: 'flex' }}>
+        <select
+          id="shape-select"
+          value={shape}
+          onChange={(e) => setShape(e.target.value)}
+        >
+          <option value="cube">Cubo</option>
+          <option value="pyramid">Pirámide</option>
+          <option value="donut">Dona</option>
+          <option value="halfCircle">Medio círculo</option>
+          <option value="cylinder">Cilindro</option>
+          <option value="rhombus">Rombo</option>
+          <option value="hexagon">Hexágono</option>
+        </select>
+      <div>
         <button onClick={() => setShowPosition(!showPosition)}>
           <i className="fas fa-cogs"></i> Posición
         </button>
         {showPosition && (
           <div>
             {['X', 'Y', 'Z'].map((axis, index) => (
-              <div key={`pos-${axis}`} style={{ marginBottom: '10px' }}>
+              <div key={`pos-${axis}`}>
                 <label>
                   {axis} Posición:
                   <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -92,14 +105,14 @@ const Controls = ({ onTransform }) => {
         )}
       </div>
 
-      <div style={{ marginBottom: '10px' }}>
+      <div>
         <button onClick={() => setShowRotation(!showRotation)}>
           <i className="fas fa-sync-alt"></i> Rotación
         </button>
         {showRotation && (
           <div>
             {['X', 'Y', 'Z'].map((axis, index) => (
-              <div key={`rot-${axis}`} style={{ marginBottom: '10px' }}>
+              <div key={`rot-${axis}`}>
                 <label>
                   {axis} Rotación (grados):
                   <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -129,14 +142,14 @@ const Controls = ({ onTransform }) => {
         )}
       </div>
 
-      <div style={{ marginBottom: '10px' }}>
+      <div>
         <button onClick={() => setShowCamera(!showCamera)}>
           <i className="fas fa-camera"></i> Cámara
         </button>
         {showCamera && (
           <div>
             {['X', 'Y', 'Z'].map((axis, index) => (
-              <div key={`camera-${axis}`} style={{ marginBottom: '10px' }}>
+              <div key={`camera-${axis}`}>
                 <label>
                   {axis} Cámara:
                   <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -166,14 +179,14 @@ const Controls = ({ onTransform }) => {
         )}
       </div>
 
-      <div style={{ marginBottom: '10px' }}>
+      <div>
         <button onClick={() => setShowShear(!showShear)}>
           <i className="fas fa-arrows-alt"></i> Sesgado
         </button>
         {showShear && (
           <div>
             {['X', 'Y', 'Z'].map((axis, index) => (
-              <div key={`shear-${axis}`} style={{ marginBottom: '10px' }}>
+              <div key={`shear-${axis}`}>
                 <label>
                   {axis} Sesgado:
                   <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -203,7 +216,7 @@ const Controls = ({ onTransform }) => {
         )}
       </div>
 
-      <div style={{ marginBottom: '10px' }}>
+      <div>
         <button onClick={() => setShowBrightness(!showBrightness)}>
           <i className="fas fa-sun"></i> Brillo
         </button>
@@ -236,7 +249,7 @@ const Controls = ({ onTransform }) => {
         )}
       </div>
 
-      <div style={{ marginBottom: '10px' }}>
+      <div>
         <button onClick={() => setShowScale(!showScale)}>
           <i className="fas fa-expand"></i> Escala
         </button>

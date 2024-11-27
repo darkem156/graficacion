@@ -1,6 +1,135 @@
 #controls > div > div {
   position: absolute;
   z-index: 10;
-  background: white;
+  background: blue;
   padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid black;
+  min-width: 200px;
+}
+
+canvas, #controls {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#controls {
+  z-index: 10;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', Arial, sans-serif;
+  background: linear-gradient(135deg, #002c4a, #004f7c);
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#controls {
+  background: #00395d;
+  border: 1px solid #004f7c;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  max-width: 800px;
+  color: #ffffff;
+}
+
+#controls button {
+  background: #005f8f;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin: 5px;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#controls button:hover {
+  background: #0074b3;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+}
+
+#controls select {
+  background: #005f8f;
+  border: 1px solid #004f7c;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 5px 10px;
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+#controls input[type="range"] {
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: #004f7c;
+  border-radius: 4px;
+  outline: none;
+  transition: background 0.3s ease;
+}
+
+#controls input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #00a4e0;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+#controls input[type="range"]:hover {
+  background: #0074b3;
+}
+
+#controls input[type="number"] {
+  background: #004f7c;
+  border: none;
+  border-radius: 8px;
+  padding: 5px;
+  width: 70px;
+  color: #ffffff;
+  text-align: center;
+  margin-left: 10px;
+  font-size: 1rem;
+}
+
+label {
+  font-weight: 500;
+}
+
+#controls div label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#controls i {
+  margin-right: 5px;
+  color: #00a4e0;
+}
+
+@media (max-width: 768px) {
+  #controls {
+    padding: 15px;
+    width: 90%;
+  }
+
+  #controls button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  #controls input[type="number"] {
+    width: 60px;
+    font-size: 0.9rem;
+  }
 }
